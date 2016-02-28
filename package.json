@@ -1,0 +1,19 @@
+{
+  "name": "jump-to-import",
+  "main": "./lib/jump-to-import",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "jump-to-import:go-to-module"
+  },
+  "repository": "https://github.com/alexheyd/atom-jump-to-import",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "symbols-view": "git+https://github.com/atom/symbols-view.git"
+  }
+}
