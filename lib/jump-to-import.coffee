@@ -39,8 +39,7 @@ module.exports = JumpToImport =
     @subscriptions.add atom.commands.add 'atom-workspace', 'jump-to-import:go-to-module': => @goToModule()
 
   goToModule: ->
-    cursorString = AtomUtils.findStringUnderCursor()
-    module       = @getModule cursorString
+    module = @getModule AtomUtils.findStringUnderCursor()
 
     if AtomUtils.getCachedProjectName()
       @openModule module
