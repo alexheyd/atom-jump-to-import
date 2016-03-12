@@ -133,7 +133,7 @@ module.exports = AtomUtils =
 
   extractImportPath: (moduleName) ->
     # look for `import moduleName from 'path/to/module'`
-    importPath = @getEditor().getText().match 'import ' + moduleName + ' from [\'"](.*?)[\'"]'
+    importPath = @getEditor().getText().match('import ' + moduleName + ' from [\'"](.*?)[\'"]')
     return importPath?[1]
 
   extractProjectName: (json) ->
