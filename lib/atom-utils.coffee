@@ -4,6 +4,7 @@ path         = require 'path'
 
 ABSOLUTE_PATH_PATTERN = '^(\\w+(?:/\\w+)+)(?:.*?)?$'
 RELATIVE_PATH_PATTERN = '^((?:..?/)+(?:\\w+/)*\\w+)(?:.*?)?$'
+PROJECT_NAME_WILDCARD = '$PROJECT'
 
 AtomUtilsCacheDefaults =
   editor: null
@@ -202,6 +203,7 @@ module.exports = AtomUtils =
     replacements = {}
     pathReplaced = false
 
+    # takes path overrides and splits on the colon (target:replacement)
     _extractTargetFrom = (pathOverride) =>
       parts       = pathOverride.split ':'
       target      = parts[0]
@@ -209,15 +211,22 @@ module.exports = AtomUtils =
       targets.push target
       replacements[target] = replacement
 
+    # replaces target string with replacement
     _replacePath = (target) =>
+      # stop looping after first replacement
       return if pathReplaced
 
-      replaced = target.replace '$PROJECT', @currentProjectName
+      # replace $PROJECT wildcard with actual project name
+      replaced = target.replace PROJECT_NAME_WILDCARD, @currentProjectName
 
+      # if target path string is found
       if filePath.indexOf(replaced) > -1
+        # replace with replacement path string
         finalPath    = filePath.replace replaced, replacements[target]
+        # indicate the loop should end
         pathReplaced = true
 
+    # don't override paths if feature is disabled
     unless @options.disablePathOverrides
       _extractTargetFrom target for target in @options.pathOverrides
       # sort targets by longest string first (more specific path)
