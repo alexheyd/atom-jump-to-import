@@ -1,4 +1,6 @@
 TagGenerator = require 'symbols-view/lib/tag-generator'
+fs           = require 'fs'
+path         = require 'path'
 
 ABSOLUTE_PATH_PATTERN = '^(\\w+(?:/\\w+)+)(?:.*?)?$'
 RELATIVE_PATH_PATTERN = '^((?:..?/)+(?:\\w+/)*\\w+)(?:.*?)?$'
@@ -14,6 +16,7 @@ AtomUtilsCacheDefaults =
     cursor: null
   paths:
     currentFile: {}
+    root: null
 
 module.exports = AtomUtils =
   options: {}
@@ -63,11 +66,13 @@ module.exports = AtomUtils =
     return cachedPath or filePath
 
   getAbsoluteCurrentFileRoot: ->
-    return @getRelativeCurrentFilePath()[0]
+    rootPath = @getRelativeCurrentFilePath()[0]
+    @cache.paths.root = rootPath
+    return rootPath
 
   getRelativeCurrentFileRoot: ->
     fileRoot = @getRelativeCurrentFilePath()[1]
-    return fileRoot.substring(0, fileRoot.lastIndexOf('/'))
+    return path.dirname(fileRoot)
 
   getProjectName: (currentFileRoot) ->
     return @readPackageJson(currentFileRoot).then (contents) => @cacheProjectName currentFileRoot, @extractProjectName(contents)
@@ -189,7 +194,7 @@ module.exports = AtomUtils =
     filePath
 
   buildRelativePath: (filePath) ->
-    @getRelativeCurrentFileRoot() + '/' + @appendJSExtension filePath
+    path.join @getRelativeCurrentFileRoot(), @appendJSExtension filePath
 
   overridePaths: (filePath) ->
     finalPath    = filePath
@@ -206,10 +211,12 @@ module.exports = AtomUtils =
 
     _replacePath = (target) =>
       return if pathReplaced
+
       replaced = target.replace '$PROJECT', @currentProjectName
 
       if filePath.indexOf(replaced) > -1
-        finalPath = filePath.replace replaced, replacements[target]
+        finalPath    = filePath.replace replaced, replacements[target]
+        pathReplaced = true
 
     unless @options.disablePathOverrides
       _extractTargetFrom target for target in @options.pathOverrides
@@ -239,11 +246,11 @@ module.exports = AtomUtils =
   openFile: (filePath, fileMethod) ->
     finalPath = @buildFinalFilePath filePath
     return unless finalPath
-    @openEditor finalPath, fileMethod
+    fullSystemPath = path.join @cache.paths.root, finalPath
+    fs.exists(fullSystemPath, (exists) => if exists then @openEditor(finalPath, fileMethod))
 
   openEditor: (filePath, fileMethod) ->
     openedEditor = atom.workspace.open filePath
-
     return unless openedEditor
 
     openedEditor.then (editor) =>
