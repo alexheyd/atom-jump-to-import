@@ -1,7 +1,7 @@
 {
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Jump to ES6 import module definitions, including methods.",
   "keywords": [],
   "activationCommands": {
