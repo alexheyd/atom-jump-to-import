@@ -118,13 +118,6 @@ module.exports = AtomUtils =
     cursorString   = if range? then editor.getTextInBufferRange editor.bufferRangeForScreenRange range
     return cursorString or editor.getWordUnderCursor().replace(/,/g)
 
-  # getStringFromCursor: (cursorPosition) ->
-  #   editor = @getEditor()
-  #   range  = editor.displayBuffer.bufferRangeForScopeAtPosition('.string', cursorPosition)
-  #   return unless range
-  #   cursorString = editor.getTextInBufferRange(editor.bufferRangeForScreenRange(range))
-  #   return cursorString
-
   currentWordIsMethod: ->
     editor           = @getEditor()
     cursor           = editor.getLastCursor()
@@ -167,7 +160,6 @@ module.exports = AtomUtils =
 
   cacheProjectDirectories: ->
     @cacheDirectory directory for directory in @getProjectDirectories()
-    # @getProjectDirectories().forEach (directory) => @cacheDirectory directory
 
   # cache project roots with Directory object and project name for future lookup
   cacheDirectory: (directory) ->
@@ -184,7 +176,8 @@ module.exports = AtomUtils =
     if str? then str[0] is '\'' or str[0] is '"' else false
 
   isAbsolutePath: (filePath) ->
-    filePath.match ABSOLUTE_PATH_PATTERN
+    index = filePath.indexOf @currentProjectName, 0
+    if index is 0 then true else false
 
   isRelativePath: (filePath) ->
     filePath.match RELATIVE_PATH_PATTERN
