@@ -49,22 +49,16 @@ module.exports = AtomUtils =
     return @cache.directories[rootPath]?.directory
 
   getEditor: ->
-    return @getCachedEditor() or @cacheEditor atom.workspace.getActiveTextEditor()
+    return @cacheEditor atom.workspace.getActiveTextEditor()
 
   getEditorPath: ->
     return @getEditor().getPath()
 
   getCursor: ->
-    return @getCachedCursor() or @cacheCursor @getEditor().getLastCursor()
+    return @getEditor().getLastCursor()
 
   getRelativeCurrentFilePath: ->
-    cachedPath = @cache.paths.currentFile.relative
-
-    unless cachedPath?
-      filePath = atom.project.relativizePath @getEditorPath()
-      @cache.paths.currentFile.relative = filePath
-
-    return cachedPath or filePath
+    return atom.project.relativizePath @getEditorPath()
 
   getAbsoluteCurrentFileRoot: ->
     rootPath = @getRelativeCurrentFilePath()[0]
