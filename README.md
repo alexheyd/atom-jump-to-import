@@ -10,7 +10,7 @@ This package will open the relevant file for an imported module based on where t
 
 You can open the module by pressing `Ctrl+Alt+E` when your cursor is on the module variable or the import path. This also works with module method names. For functions declared in the same file, it uses Atom's native `Symbols View` package.
 
-### Example
+## Example
 With the following import line:
 
 ```javascript
@@ -32,6 +32,15 @@ File extension is assumed to be `.js`
 
 The package _could_ check for the existence of the folder first, and then check the project root for the same folder name, but checking if a directory exists returns a promise, which would slow the package down.
 
-### Known issues
+## Features
+- Jump to imported file from path, variable name, or method name
+- Custom path overrides
+- babel-plugin-module-resolver support: loads path overrides from project's `.babelrc`
 
-Soft wrap and code folding break opening modules when cursor is in string. (atom/atom#8685)
+## Coming Soon
+- Multiple project root folder support
+- Tag and path caching
+
+## Known issues
+- Soft wrap and code folding break opening modules when cursor is in string. (atom/atom#8685)
+- Only supports one project root folder
