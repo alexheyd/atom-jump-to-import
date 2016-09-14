@@ -32,10 +32,27 @@ File extension is assumed to be `.js`
 
 The package _could_ check for the existence of the folder first, and then check the project root for the same folder name, but checking if a directory exists returns a promise, which would slow the package down.
 
+## .babelrc Support
+
+Support for `babel-plugin-module-resolver` has been added, where you can have the babel module aliases used for the file lookups.
+
+```
+{
+  "plugins": [
+      ["module-resolver", {
+        "root": ["./src"],
+        "alias": {
+          "utils": "./src/utils"
+        }
+      }]
+    ]
+}
+```
+
 ## Features
 - Jump to imported file from path, variable name, or method name
 - Custom path overrides
-- babel-plugin-module-resolver support: loads path overrides from project's `.babelrc`
+- `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
 
 ## Coming Soon
 - Multiple project root folder support
