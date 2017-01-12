@@ -60,6 +60,7 @@ With the above `.babelrc` file, a path of `utils/test` will resolve to `./src/ut
 - Custom path overrides
 - `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
 - Multiple project root folder support
+- Supports multi-line destructured `import` statements
 
 ## Coming Soon
 - Multiple file extension support
