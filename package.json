@@ -3,6 +3,7 @@
   "main": "./lib/jump-to-import",
   "version": "1.7.2",
   "description": "Jump to ES6 import module definitions, including methods.",
+  "license": "MIT",
   "keywords": [],
   "activationCommands": {
     "atom-workspace": "jump-to-import:go-to-module"
