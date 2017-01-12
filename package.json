@@ -1,7 +1,7 @@
 {
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Jump to ES6 import module definitions, including methods.",
   "license": "MIT",
   "keywords": [],
@@ -9,7 +9,6 @@
     "atom-workspace": "jump-to-import:go-to-module"
   },
   "repository": "https://github.com/alexheyd/atom-jump-to-import",
-  "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
