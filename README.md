@@ -2,9 +2,25 @@
 
 *Replacement package for the `ember-import-navigator` Atom package.*
 
-Press CTRL+ALT+E with the cursor on a CommonJS `import` path, the `import` variable, or a method on the imported namespace to open that file and jump to the relevant method, if applicable. For functions declared in the same file, it uses Atom's native `Symbols View` package.
+Contributions and Pull Requests are welcome.
 
-## Example
+## Limitations
+- `package.json` required at root of project
+  - used to figure out the project name to use when converting magic paths to the real file path
+- only opens JS files (for now)
+
+## Features
+- Jump to imported file from path, variable name, or method name
+- Custom path overrides
+- `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
+- Multiple project root folder support
+- Supports multi-line destructured `import` statements
+- Ability to disable custom path overrides and `.babelrc` overrides
+
+## Usage
+Press CTRL+ALT+E with the cursor either on a CommonJS `import` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable. For functions declared in the same file, it uses Atom's native `Symbols View` package.
+
+### Example
 With the following `import` line:
 
 ```javascript
@@ -55,17 +71,9 @@ With the above `.babelrc` file, a path of `utils/test` will resolve to `./src/ut
 
 **Note:** The `pathOverrides` defined in `Settings` have priority over `.babelrc` aliases.
 
-## Features
-- Jump to imported file from path, variable name, or method name
-- Custom path overrides
-- `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
-- Multiple project root folder support
-- Supports multi-line destructured `import` statements
-
 ## Coming Soon
 - Multiple file extension support
-- ~~Tag and path caching~~
-  - will not be caching because files and tags can be edited on the fly and cache will likely get stale
+- Ability to define a project name if no `package.json` file is present
 
 ## Known issues
 - Soft wrap and code folding break opening modules when cursor is in string. (atom/atom#8685)
