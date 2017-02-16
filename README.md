@@ -11,11 +11,13 @@ Contributions and Pull Requests are welcome.
 
 ## Features
 - Jump to imported file from path, variable name, or method name
-- Custom path overrides
 - `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
 - Multiple project root folder support
 - Supports multi-line destructured `import` statements
-- Ability to disable custom path overrides and `.babelrc` overrides
+- Configurable settings:
+  - Custom path overrides
+  - Ability to disable custom path overrides and `.babelrc` overrides
+  - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
 
 ## Usage
 Press CTRL+ALT+E with the cursor either on a CommonJS `import` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable. For functions declared in the same file, it uses Atom's native `Symbols View` package.
@@ -48,7 +50,7 @@ With the above default settings (for Ember projects) we would get the following 
 
 The package will look for a `package.json` file in every root directory of the project to determine project names.
 
-File extension is assumed to be `.js`
+You can now also define a list of file extensions to try and open.
 
 ## .babelrc Support
 
@@ -72,7 +74,6 @@ With the above `.babelrc` file, a path of `utils/test` will resolve to `./src/ut
 **Note:** The `pathOverrides` defined in `Settings` have priority over `.babelrc` aliases.
 
 ## Coming Soon
-- Multiple file extension support
 - Ability to define a project name if no `package.json` file is present
 
 ## Known issues
