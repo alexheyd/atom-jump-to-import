@@ -7,10 +7,11 @@ Contributions and Pull Requests are welcome.
 ## Limitations
 - `package.json` required at root of project
   - used to figure out the project name to use when converting magic paths to the real file path
-- only opens JS files (for now)
 
 ## Features
 - Jump to imported file from path, variable name, or method name
+- **NPM Module Support** with Browserify (as long as the path is formatted like `npm:path-to-package`)
+  - it grabs the package's entry file from its `package.json` `main` value
 - `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
 - Multiple project root folder support
 - Supports multi-line destructured `import` statements
