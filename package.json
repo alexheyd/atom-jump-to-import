@@ -1,7 +1,7 @@
 {
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Jump to ES6 import module definitions, including methods.",
   "license": "MIT",
   "keywords": [],
