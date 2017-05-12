@@ -13,6 +13,8 @@ Contributions and Pull Requests are welcome.
 - Jump to imported file from path, variable name, or method name
 - **NPM Module Support** (matches `import foo from 'foo';` as well as `import foo from 'npm:foo';`)
   - it grabs the package's entry file from its `package.json` `main` value
+- **Bower Module Support**: if an npm module of the same name was not found, it'll try to find a bower module of the same name
+  - it grabs the package's entry file either from its `package.json` or `bower.json` `main` value
 - `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
 - Multiple project root folder support
 - Supports multi-line, destructured `import` statements
