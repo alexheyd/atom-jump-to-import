@@ -27,7 +27,9 @@ Contributions and Pull Requests are welcome.
   - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
 
 ## Usage
-Press CTRL+ALT+E with the cursor either on a CommonJS `import` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable. For functions declared in the same file, it uses Atom's native `Symbols View` package.
+Press `CTRL+ALT+E` with the cursor either on a CommonJS `import` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable. Alternatively, you can use `Alt/Option+Left-Click`
+
+For functions declared in the same file, it uses Atom's native `Symbols View` package.
 
 ### Example
 With the following `import` line:
