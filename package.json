@@ -5,15 +5,23 @@
   "description": "Jump to ES6 import or require module definitions, including NPM and Bower imports.",
   "license": "MIT",
   "keywords": [],
-  "activationCommands": {
-    "atom-workspace": "jump-to-import:go-to-module"
-  },
   "repository": "https://github.com/alexheyd/atom-jump-to-import",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "atom-package-deps": "^4.6.0",
     "symbols-view": "git+https://github.com/atom/symbols-view.git",
     "find-babel-config": "^1.0.1"
+  },
+  "package-deps": [
+    "hyperclick"
+  ],
+  "providedServices": {
+    "hyperclick.provider": {
+      "versions": {
+        "0.0.0": "getProvider"
+      }
+    }
   }
 }

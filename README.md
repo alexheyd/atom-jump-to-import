@@ -9,6 +9,9 @@ Contributions and Pull Requests are welcome.
   - used to figure out the project name to use when converting magic paths to the real file path
 
 ## Features
+- `hyperclick` support:
+  - you can now Alt+Click (or Options+Click on Mac) on variable names, import paths or methods
+  - installing `hyperclick` is a requirement if you plan to use this functionality
 - Supports `import` and `require` syntax
 - Jump to imported file from path, variable name, or method name
 - **NPM Module Support** (matches `import foo from 'foo';` as well as `import foo from 'npm:foo';`)
@@ -20,7 +23,7 @@ Contributions and Pull Requests are welcome.
 - Supports multi-line, destructured `import` statements
 - Configurable settings:
   - Custom path overrides
-  - Ability to disable custom path overrides and `.babelrc` overrides
+  - Ability to disable custom path overrides, `.babelrc` overrides, `hyperclick` support
   - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
 
 ## Usage
