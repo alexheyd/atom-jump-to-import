@@ -1,7 +1,7 @@
 {
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "Jump to ES6 import or require module definitions, including NPM and Bower imports.",
   "license": "MIT",
   "keywords": [],
