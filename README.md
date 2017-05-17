@@ -9,6 +9,7 @@ Contributions and Pull Requests are welcome.
   - used to figure out the project name to use when converting magic paths to the real file path
 
 ## Features
+- Supports jumping to `Ember.Service` files, configurable to use a pod structure or not
 - `hyperclick` support:
   - you can now Alt+Click (or Options+Click on Mac) on variable names, import paths or methods
   - installing `hyperclick` is a requirement if you plan to use this functionality
