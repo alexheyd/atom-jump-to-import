@@ -2,7 +2,7 @@
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
   "version": "3.2.8",
-  "description": "Jump to ES6 import or require module definitions, including NPM and Bower imports.",
+  "description": "Jump to ES6 import/require/bower/npm modules, including Ember.Service. Now with hyperclick support!",
   "license": "MIT",
   "keywords": [],
   "repository": "https://github.com/alexheyd/atom-jump-to-import",

@@ -1,7 +1,5 @@
 # jump-to-import package
 
-*Replacement package for the `ember-import-navigator` Atom package.*
-
 Contributions and Pull Requests are welcome.
 
 ## Limitations
@@ -9,28 +7,29 @@ Contributions and Pull Requests are welcome.
   - used to figure out the project name to use when converting magic paths to the real file path
 
 ## Features
-- Supports jumping to `Ember.Service` files, with or without pod structure
-  - also supports `Ember.Service` aliases in cases where the injected variable name differs from the file name
+- Jump to imported file from path, variable name, or method name
+  - supports `import` and `require` syntax
+  - supports path aliasing
+  - supports NPM and Bower modules (including `npm:foo` syntax for `Browserify`)
+- Jump to `Ember.Service` files, with or without pod structure
+  - supports `Ember.Service` name aliasing
 - `hyperclick` support:
   - you can now click on variable names, import paths or methods
   - installing `hyperclick` is a requirement if you plan to use this functionality
   - you may need to configure `hyperclick` to use an appropriate hotkey
-- Supports `import` and `require` syntax
-- Jump to imported file from path, variable name, or method name
-- **NPM Module Support** (matches `import foo from 'foo';` as well as `import foo from 'npm:foo';`)
-  - it grabs the package's entry file from its `package.json` `main` value
-- **Bower Module Support**: if an npm module of the same name was not found, it'll try to find a bower module of the same name
-  - it grabs the package's entry file either from its `package.json` or `bower.json` `main` value
 - `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
-- Multiple project root folder support
-- Supports multi-line, destructured `import` statements
+- Multiple project root folders
+- Multi-line, destructured `import` statements
 - Configurable settings:
-  - Custom path overrides
+  - Custom path aliases
+  - Ember.Service name aliasing
   - Ability to disable custom path overrides, `.babelrc` overrides, `hyperclick` support
   - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
 
 ## Usage
-Press `CTRL+ALT+E` with the cursor either on a CommonJS `import` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable. Alternatively, you can use `Alt/Option+Left-Click`
+Press `CTRL+ALT+E` with the cursor either on a ES6 `import`/`require` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable.
+
+Alternatively, you can use your `hyperclick` togggle and click.
 
 For functions declared in the same file, it uses Atom's native `Symbols View` package.
 
