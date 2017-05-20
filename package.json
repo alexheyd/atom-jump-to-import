@@ -2,7 +2,7 @@
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
   "version": "3.2.9",
-  "description": "Jump to ES6 import/require/bower/npm modules, including Ember.Service. Now with hyperclick support!",
+  "description": "Jump to ES6 import/require/bower/npm modules, including Ember.Service and Ember.Component template files. With hyperclick support and project-specific configs.",
   "license": "MIT",
   "keywords": [],
   "repository": "https://github.com/alexheyd/atom-jump-to-import",
@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "atom-package-deps": "^4.6.0",
-    "symbols-view": "git+https://github.com/atom/symbols-view.git",
-    "find-babel-config": "^1.0.1"
+    "deepmerge": "^1.3.2",
+    "find-babel-config": "^1.0.1",
+    "symbols-view": "git+https://github.com/atom/symbols-view.git"
   },
   "package-deps": [
     "hyperclick"

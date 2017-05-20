@@ -2,7 +2,11 @@
 
 Contributions and Pull Requests are welcome.
 
-## Limitations
+## Description
+Quickly jump to a module file from its import path or variable. Also supports jumping to `Ember.Service` definitions.
+
+
+## Requirements
 - `package.json` required at root of project
   - used to figure out the project name to use when converting magic paths to the real file path
 
@@ -13,6 +17,8 @@ Contributions and Pull Requests are welcome.
   - supports NPM and Bower modules (including `npm:foo` syntax for `Browserify`)
 - Jump to `Ember.Service` files, with or without pod structure
   - supports `Ember.Service` name aliasing
+- Jump to `Ember.Component` template files, with or without pod structure
+  - from an `.hbs` file, component names can jump to their template file
 - `hyperclick` support:
   - you can now click on variable names, import paths or methods
   - installing `hyperclick` is a requirement if you plan to use this functionality
@@ -21,19 +27,115 @@ Contributions and Pull Requests are welcome.
 - Multiple project root folders
 - Multi-line, destructured `import` statements
 - Configurable settings:
+  - Project-specific settings via `.jump-to-import` file
   - Custom path aliases
   - Ember.Service name aliasing
   - Ability to disable custom path overrides, `.babelrc` overrides, `hyperclick` support
   - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
 
 ## Usage
-Press `CTRL+ALT+E` with the cursor either on a ES6 `import`/`require` path, or the imported namespace, or a method on the imported namespace to open that file and jump to the relevant method, if applicable.
 
-Alternatively, you can use your `hyperclick` togggle and click.
+#### Without `hyperclick`
+Press `CTRL+ALT+E` with the cursor either on:
+- an ES6 `import`/`require` path
+- the imported namespace/variable
+- a method on the imported namespace
+- an `Ember.Service` dependency injection (i.e `foo: Ember.inject.service()`)
 
-For functions declared in the same file, it uses Atom's native `Symbols View` package.
+to open that file and jump to the relevant method, if applicable.
 
-### Example
+#### With `hyperclick`
+Hold your `hyperclick` toggle key and click on any applicable string to jump to that module.
+
+## Setup
+The package looks for configuration options and path aliases in two places:
+- package settings
+- .jump-to-import files (project settings)
+- .babelrc files (babel aliases)
+
+#### Package Settings
+These are simply accessed in Atom's `Settings > Packages > Jump To Import`. These are basically global settings that will apply to any project.
+
+
+##### Aliases
+You can define your own path aliases in Settings.
+
+Default aliases are:
+- `$PROJECT:app`
+- `$PROJECT/config:config`
+
+With the above default settings (for Ember projects) we would get the following behavior:
+- `PROJECT_NAME/components/foo` -> `app/components/foo.js`
+- `PROJECT_NAME/config/environment` -> `config/environment.js`
+
+`PROJECT_NAME` in the path needs to match the project name defined in your `package.json` file in the root directory.
+
+##### Project Name
+The package will look for a `package.json` file in every root directory of the project to determine project names.
+
+##### File Extensions
+You can also define a list of file extensions to look for.
+
+##### Ember.Service Aliases
+You can define `Ember.Service` name aliases, in case the injected variable name and registered service name differ.
+
+#### .jump-to-import
+Optionally, you can add a `.jump-to-import` file in any root folder of your project which will take precedence over the package settings. These allow for project-specific settings and aliases.
+
+You can trigger the `jump-to-import:create-project-config` through the `Command Palette` to generate a default config.
+
+**NOTE:** Project settings only apply to the root directory they belong to.
+
+Here's a sample config, using default settings:
+
+```javascript
+{
+  "usePendingPane": true,
+  "openInSeparatePane": true,
+  "panePosition": "right",
+  "useEmberPods": true,
+  "fileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "pathOverrides": [
+    "$PROJECT:app",
+    "$PROJECT/config:config",
+    "$PROJECT/tests:tests"
+  ],
+  "serviceOverrides": [
+    "fastboot:boot"
+  ],
+  "disablePathOverrides": false,
+  "disableBabelRc": false,
+  "disableHyperclickSupport": false
+}
+```
+
+#### .babelrc
+Optionally, you can use path aliases defined in `.babelrc`. A sample file looks like:
+
+```javascript
+{
+  "plugins": [
+      ["module-resolver", {
+        "root": ["./src"],
+        "alias": {
+          "utils": "./utils"
+        }
+      }]
+    ]
+}
+```
+
+With the above `.babelrc` file, a path of `utils/test` will resolve to `./src/utils/test.js`
+
+#### Settings & Aliases Priority
+Project settings and aliases defined in `.jump-to-import` will always take priority. Next, `.babelrc` aliases take precedence over aliases defined in Package Settings.
+
+Remember, `.jump-to-import` > `.babelrc` > `Package Settings`
+
+## Example
 With the following `import` line:
 
 ```javascript
@@ -44,42 +146,3 @@ import FooMixin from 'my-project/mixins/foo'
 // with cursor on, or selecting, bar, will open project-root/app/mixins/foo.js and jump to the bar() method
 FooMixin.bar();
 ```
-
-### Plugin Settings
-
-You can define your own path overrides in Settings.
-
-Default overrides are:
-- `$PROJECT:app`
-- `$PROJECT/config:config`
-
-With the above default settings (for Ember projects) we would get the following behavior:
-- `PROJECT_NAME/components/foo` -> `app/components/foo.js`
-- `PROJECT_NAME/config/environment` -> `config/environment.js`
-
-`PROJECT_NAME` in the path needs to match the project name defined in your `package.json` file in the root directory.
-
-The package will look for a `package.json` file in every root directory of the project to determine project names.
-
-You can now also define a list of file extensions to try and open.
-
-## .babelrc Support
-
-Support for `babel-plugin-module-resolver` has been added, where you can have the babel module aliases used for the file lookups.
-
-```
-{
-  "plugins": [
-      ["module-resolver", {
-        "root": ["./src"],
-        "alias": {
-          "utils": "./src/utils"
-        }
-      }]
-    ]
-}
-```
-
-With the above `.babelrc` file, a path of `utils/test` will resolve to `./src/utils/test.js`
-
-**Note:** The `pathOverrides` defined in `Settings` have priority over `.babelrc` aliases.
