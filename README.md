@@ -45,6 +45,9 @@ Quickly jump to a module file from its import path or variable. Also supports ju
     - you may need to configure `hyperclick` to use an appropriate hotkey
 - `babel-plugin-module-resolver` support:
     - loads path overrides from project's `.babelrc`
+- **NEW:** very basic Webpack Module Alias support
+    - this *only* supports the `resolve.alias` section of the `webpack.config.js`
+    - **NOTE:** any modification to `webpack.config.js` requires reloading Atom for now
 - Multiple project root folders
 - Configurable settings:
     - Project-specific settings via `.jump-to-import` file
@@ -55,7 +58,7 @@ Quickly jump to a module file from its import path or variable. Also supports ju
 
 ## Usage
 
-#### Without `hyperclick`
+### Without `hyperclick`
 Press <kbd>CTRL+ALT+E</kbd> with the cursor either on:
 - an ES6 `import`/`require` path
 - the imported namespace/variable
@@ -64,7 +67,7 @@ Press <kbd>CTRL+ALT+E</kbd> with the cursor either on:
 
 to open that file and jump to the relevant method, if applicable.
 
-#### With `hyperclick`
+### With `hyperclick`
 Hold your `hyperclick` toggle key and click on any applicable string to jump to that module.
 
 ## Setup
@@ -73,11 +76,11 @@ The package looks for configuration options and path aliases in two places:
 - `.jump-to-import` files (project settings)
 - `.babelrc` files (babel aliases)
 
-#### Package Settings
+### Package Settings
 These are simply accessed in Atom's `Settings > Packages > Jump To Import`. These are basically global settings that will apply to any project.
 
 
-##### Aliases
+#### Aliases
 You can define your own path aliases in Settings.
 
 Default aliases are:
@@ -90,16 +93,16 @@ With the above default settings (for Ember projects) we would get the following 
 
 `PROJECT_NAME` in the path needs to match the project name defined in your `package.json` file in the root directory.
 
-##### Project Name
+#### Project Name
 The package will look for a `package.json` file in every root directory of the project to determine project names.
 
-##### File Extensions
+#### File Extensions
 You can also define a list of file extensions to look for.
 
-##### Ember.Service Aliases
+#### Ember.Service Aliases
 You can define `Ember.Service` name aliases, in case the injected variable name and registered service name differ.
 
-#### .jump-to-import
+### .jump-to-import
 Optionally, you can add a `.jump-to-import` file in any root folder of your project which will take precedence over the package settings. These allow for project-specific settings and aliases.
 
 You can trigger the `jump-to-import:create-project-config` through the `Command Palette` to generate a default config.
@@ -132,7 +135,7 @@ Here's a sample config, using default settings:
 }
 ```
 
-#### .babelrc
+### .babelrc
 Optionally, you can use path aliases defined in `.babelrc`. A sample file looks like:
 
 ```javascript
@@ -150,7 +153,7 @@ Optionally, you can use path aliases defined in `.babelrc`. A sample file looks 
 
 With the above `.babelrc` file, a path of `utils/test` will resolve to `./src/utils/test.js`
 
-#### Settings & Aliases Priority
+### Settings & Aliases Priority
 Project settings and aliases defined in `.jump-to-import` will always take priority. Next, `.babelrc` aliases take precedence over aliases defined in Package Settings.
 
 Remember, `.jump-to-import` > `.babelrc` > `Package Settings`
