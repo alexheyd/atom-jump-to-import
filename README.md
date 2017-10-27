@@ -2,41 +2,61 @@
 
 Contributions and Pull Requests are welcome.
 
+## Installation
+```bash
+apm install jump-to-import
+```
+
+## Bugs
+**NOTE:** please do the following before submitting an Issue
+- enable debug logging in package settings (check box next to `Enable Debug`)
+- in Atom's devtools (<kbd>CMD+ALT+I</kbd>), you'll see a log named `[jump-to-import] Debug Report: Object`
+- click the `down arrow` next to `Object` to expand it, then copy and paste the log into a GitHub Issue
+
+**Privacy Note:** please be aware that this will submit the following information to me:
+- what string you attempted to jump to
+- your path aliases
+- user options for this package
+- file paths that couldn't be found
+- whether the file was a Javascript or HTMLBars file
+
 ## Description
 Quickly jump to a module file from its import path or variable. Also supports jumping to `Ember.Service` definitions.
 
 
 ## Requirements
 - `package.json` required at root of project
-  - used to figure out the project name to use when converting magic paths to the real file path
+    - used to figure out the project name to use when converting magic paths to the real file path
 
 ## Features
-- Jump to imported file from path, variable name, or method name
-  - supports `import` and `require` syntax
-  - supports path aliasing
-  - supports NPM and Bower modules (including `npm:foo` syntax for `Browserify`)
-- Jump to `Ember.Service` files, with or without pod structure
-  - supports `Ember.Service` name aliasing
-- Jump to `Ember.Component` template files, with or without pod structure
-  - from an `.hbs` file, component names can jump to their template file
+- Jump to:
+    - imported file from path, variable name, or method name
+        - supports `import` and `require` syntax
+        - supports path aliasing
+        - supports NPM and Bower modules (including `npm:foo` syntax for `Browserify`)
+        - multi-line, destructured `import` statements
+    - `Ember.Service` files, with or without pod structure
+        - supports `Ember.Service` name aliasing
+    - `Ember.Component` template files, with or without pod structure
+        - from an `.hbs` file, component names can jump to their template file
 - `hyperclick` support:
-  - you can now click on variable names, import paths or methods
-  - installing `hyperclick` is a requirement if you plan to use this functionality
-  - you may need to configure `hyperclick` to use an appropriate hotkey
-- `babel-plugin-module-resolver` support: loads path overrides from project's `.babelrc`
+    - you can now click on variable names, import paths or methods
+    - installing `hyperclick` is a requirement if you plan to use this functionality
+    - you may need to configure `hyperclick` to use an appropriate hotkey
+- `babel-plugin-module-resolver` support:
+    - loads path overrides from project's `.babelrc`
 - Multiple project root folders
-- Multi-line, destructured `import` statements
 - Configurable settings:
-  - Project-specific settings via `.jump-to-import` file
-  - Custom path aliases
-  - Ember.Service name aliasing
-  - Ability to disable custom path overrides, `.babelrc` overrides, `hyperclick` support
-  - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
+    - Project-specific settings via `.jump-to-import` file
+    - Custom path aliases
+    - `Ember.Service` name aliasing
+    - Ability to disable custom path overrides, `.babelrc` overrides, `hyperclick` support
+    - Prioritized list of file extensions to check (defaults to `js` and `jsx`)
 
 ## Usage
 
 #### Without `hyperclick`
-Press `CTRL+ALT+E` with the cursor either on:
+Press <kbd>CTRL+ALT+E</kbd> with the cursor either on:
 - an ES6 `import`/`require` path
 - the imported namespace/variable
 - a method on the imported namespace
@@ -50,8 +70,8 @@ Hold your `hyperclick` toggle key and click on any applicable string to jump to 
 ## Setup
 The package looks for configuration options and path aliases in two places:
 - package settings
-- .jump-to-import files (project settings)
-- .babelrc files (babel aliases)
+- `.jump-to-import` files (project settings)
+- `.babelrc` files (babel aliases)
 
 #### Package Settings
 These are simply accessed in Atom's `Settings > Packages > Jump To Import`. These are basically global settings that will apply to any project.
