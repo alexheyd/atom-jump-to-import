@@ -2,6 +2,25 @@
 
 Contributions and Pull Requests are welcome.
 
+* [Installation](#installation)
+* [Bugs](#bugs)
+* [Description](#description)
+* [Requirements](#requirements)
+* [Features](#features)
+* [Usage](#usage)
+	* [Without `hyperclick`](#without-hyperclick)
+	* [With `hyperclick`](#with-hyperclick)
+* [Setup](#setup)
+	* [Package Settings](#package-settings)
+		* [Aliases](#aliases)
+		* [Project Name](#project-name)
+		* [File Extensions](#file-extensions)
+		* [Ember.Service Aliases](#emberservice-aliases)
+	* [Project-specific settings via `.jump-to-import`](#project-specific-settings-via-jump-to-import)
+	* [.babelrc](#babelrc)
+	* [Settings & Aliases Priority](#settings-aliases-priority)
+* [Example](#example)
+
 ## Installation
 ```bash
 apm install jump-to-import
@@ -21,14 +40,18 @@ apm install jump-to-import
 - whether the file was a Javascript or HTMLBars file
 
 ## Description
-Quickly jump to a module file from its import path or variable. Also supports jumping to `Ember.Service` definitions.
+Quickly jump to an ES6 module file from its import path or variable. Also supports jumping to `Ember.Service` definitions (with alias support), as well as `Ember.Component` template files from an `HTMLBars` file.
 
+Support for project-specific settings/aliases via `.jump-to-import`, additional aliases via `.babelrc` and/or `webpack.config.js`
 
 ## Requirements
 - `package.json` required at root of project
     - used to figure out the project name to use when converting magic paths to the real file path
 
 ## Features
+- Commands:
+	- `jump-to-import:go-to-module` (default keybind: <kbd>CTRL+ALT+E</kbd>)
+	- `jump-to-import:create-project-config`
 - Jump to:
     - imported file from path, variable name, or method name
         - supports `import` and `require` syntax
@@ -79,7 +102,6 @@ The package looks for configuration options and path aliases in two places:
 ### Package Settings
 These are simply accessed in Atom's `Settings > Packages > Jump To Import`. These are basically global settings that will apply to any project.
 
-
 #### Aliases
 You can define your own path aliases in Settings.
 
@@ -102,7 +124,7 @@ You can also define a list of file extensions to look for.
 #### Ember.Service Aliases
 You can define `Ember.Service` name aliases, in case the injected variable name and registered service name differ.
 
-### .jump-to-import
+### Project-specific settings via `.jump-to-import`
 Optionally, you can add a `.jump-to-import` file in any root folder of your project which will take precedence over the package settings. These allow for project-specific settings and aliases.
 
 You can trigger the `jump-to-import:create-project-config` through the `Command Palette` to generate a default config.
