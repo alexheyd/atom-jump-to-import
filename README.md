@@ -52,6 +52,7 @@ Support for project-specific settings/aliases via `.jump-to-import`, additional 
 - Commands:
 	- `jump-to-import:go-to-module` (default keybind: <kbd>CTRL+ALT+E</kbd>)
 	- `jump-to-import:create-project-config`
+	- `jump-to-import:debug-log`
 - Jump to:
     - imported file from path, variable name, or method name
         - supports `import` and `require` syntax
