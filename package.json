@@ -1,7 +1,7 @@
 {
   "name": "jump-to-import",
   "main": "./lib/jump-to-import",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "Jump to ES6 import/require/bower/npm modules, including Ember.Service and Ember.Component template files. With hyperclick support and project-specific configs.",
   "license": "MIT",
   "keywords": [],
