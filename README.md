@@ -1,3 +1,5 @@
+**NOTE:** this package isn't actively maintained anymore. I have since switched to VSCode. I'll still review and merge Pull Requests if there are any, and I'm also open to adding contributors to the repo if there's interest.
+
 # jump-to-import package
 
 Contributions and Pull Requests are welcome.
